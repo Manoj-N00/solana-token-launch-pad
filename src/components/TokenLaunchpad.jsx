@@ -1,8 +1,25 @@
-
+import { createMint, getMinimumBalanceForRentExemptMint } from "@solana/spl-token"
+import { Transaction ,SystemProgram } from "@solana/web3.js";
 export function TokenLaunchpad() {
     
-    function createToken() {
-        
+   async function createToken() {
+        const lamports = await getMinimumBalanceForRentExemptMint(connection);
+
+    const transaction = new Transaction().add(
+        SystemProgram.createAccount({
+            fromPubkey: payer.publicKey,
+            newAccountPubkey: keypair.publicKey,
+            space: MINT_SIZE,
+            lamports,
+            programId,
+        }),
+        createInitializeMint2Instruction(keypair.publicKey, decimals, mintAuthority, freezeAuthority, programId),
+    );
+
+    transaction.partialSign(keypair);
+   await wallet.signTransaction(transaction);
+
+
     }
 
 
