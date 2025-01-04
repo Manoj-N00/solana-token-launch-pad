@@ -9,3 +9,4 @@ Currently, two official plugins are available:
 - uses solana web3.js
 
 - contact:manojnaikj@gmail.com
+
